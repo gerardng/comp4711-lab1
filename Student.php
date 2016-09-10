@@ -6,8 +6,10 @@
  * Date: 2016-09-09
  * Time: 4:48 PM
  */
-class Student
-{
+class Student {
+    /**
+     * Default constructor
+     */
     function __construct() {
         $this->surname = '';
         $this->first_name = '';
@@ -15,39 +17,45 @@ class Student
         $this->grades = array();
     }
 
+    /**
+     * Adds addresses to $email[]
+     * @param $which
+     * @param $address
+     */
     function add_email($which,$address) {
         $this->emails[$which] = $address;
     }
-
-    /* NOTE: If you assign values to an array without the index,
-    PHP will automatically increment the internal reference
-    so each value goes into the next element. */
-
-    /* parameter: $grade to be added.
-    Adds another grade to array of $grades[] inside this student */
+    /**
+     * Adds number grades to $grade[]
+     * @param $grade
+     */
     function add_grade($grade) {
         $this->grades[] = $grade;
     }
 
-    /* For each value in $grades[] array, add to $total and compute average */
+    /**
+     * Calculates average of all the $value 's of each object in $grade[]
+     * @return integer
+     */
     function average() {
         $total = 0;
-        foreach ($this->grades as $value)
+        foreach ($this->grades as $value){
             $total += $value;
+        }
         return $total / count($this->grades);
     }
 
-    /* Returns first name, last name, average, each email in a string */
+    /**
+     * Returns a students first & last name, average, email/s
+     * @return string
+     */
     function toString() {
         $result = $this->first_name . ' ' . $this->surname;
         $result .= ' ('.$this->average().")\n";
-        foreach($this->emails as $which=>$what)
+        foreach($this->emails as $which=>$what){
             $result .= $which . ': '. $what. "\n";
+        }
+        $result .= "\n";
         return '<pre>'.$result.'</pre>';
     }
-
-    /* NOTE: When traversing an array of key/value pairs,
-    for instance "foreach($stuff as $key =>> $value)", you use the => operator to tell PHP to
-    put the current key into the $key variable and
-    the associated value at the key into the $value variable */
 }
